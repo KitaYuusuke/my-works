@@ -1,0 +1,50 @@
+body {
+  background-color: #c1d8ac
+}
+
+.title {
+  text-align: center;
+  font-size: 34px;
+}
+
+.headerImg{
+  /*画像をpublicに入れないと表示されない（なぜ）*/
+  background-image:url(basyo-header.png);
+  background-repeat:no-repeat;
+  background-size:cover;
+  margin: auto;
+  width: 600px;
+  height: 150px;
+}
+
+.board {
+  background-color: #f3eded;
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  border: 1px solid black;
+  margin-bottom: 20px;
+}
+
+section .errorMessage {
+  color: #d7003a;
+  padding-top: 10px;
+  padding-left: 26px;
+  font-weight: 700;
+}
+
+section .username {
+  color: #7f1184;
+  font-weight: 700;
+}
+
+.form {
+  padding: 16px;
+  margin-left: 10px;
+}
+
+section .nameArea {
+  display: flex;
+  align-items: center;
+  margin-bottom: -14px;
+}

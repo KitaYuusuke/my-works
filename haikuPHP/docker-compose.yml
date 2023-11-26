@@ -1,0 +1,46 @@
+version: '3.7'
+
+volumes:
+    db:
+        driver: local
+
+services:
+    slim:
+        container_name: slim
+        build: ./docker/
+        working_dir: /var/www
+        command: php -S 0.0.0.0:8080 -t public
+        environment:
+            docker: "true"
+        ports:
+            - 8080:8080
+        volumes:
+            - .:/var/www
+            - ./logs:/var/www/logs
+        links:
+            - db
+
+    db:
+        image: mysql:5.7
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: haiku_db
+            TZ: 'Asia/Tokyo'
+        command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+        volumes:
+            - db:/var/lib/mysql
+            - ./docker/db/conf.d:/etc/mysql/conf.d
+            - ./sql:/docker-entrypoint-initdb.d
+        ports:
+            - 3306:3306
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        environment:
+            - PMA_HOST=db
+            - PMA_USER=root
+            - PMA_PASSWORD=root
+        links:
+            - db
+        ports:
+            - 8081:80
